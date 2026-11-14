@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Lenis from "lenis";
 import BenjaminNav from "./components/BenjaminNav";
 import BenjaminHero from "./components/BenjaminHero";
@@ -39,41 +38,32 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#000000] text-[#ffffff] selection:bg-[#df2531] selection:text-white font-sans antialiased overflow-x-hidden">
-      {/* 50-50 Split Curtain Intro Overlay */}
+      {/* Smooth Split Curtain Intro Overlay */}
       <IntroSplitCurtain onOpening={() => setIsOpening(true)} />
 
       {/* 1. Top Fixed Navigation */}
       <BenjaminNav />
 
-      {/* Main Flow with Cinematic Zoom-In on Curtain Split */}
-      <motion.main
-        initial={{ scale: 0.9, opacity: 0.7, filter: "blur(4px)" }}
-        animate={{
-          scale: isOpening ? 1 : 0.9,
-          opacity: isOpening ? 1 : 0.7,
-          filter: isOpening ? "blur(0px)" : "blur(4px)",
-        }}
-        transition={{
-          duration: 1.15,
-          ease: [0.76, 0, 0.24, 1],
-        }}
-        className="origin-center"
+      {/* Main Flow - GPU-accelerated and smooth on both desktop & mobile */}
+      <main
+        className="w-full relative transition-opacity duration-700 ease-out"
+        style={{ opacity: isOpening ? 1 : 0.85 }}
       >
         {/* 2. Hero Section with Cyber Inset Video & Display Headline */}
         <BenjaminHero />
 
-        {/* 3. Selected Works Section with 3D Wireframe Satellite & Hover Preview */}
+        {/* 3. Selected Works Section with Matrix Falling Code Terminal & Hover Preview */}
         <BenjaminWorks />
 
-        {/* 5. Editorial Manifesto & ASCII Terrain Canvas */}
+        {/* 4. Editorial Manifesto & ASCII Terrain Canvas */}
         <BenjaminManifesto />
 
-        {/* 6. Skill Sets Categorized Breakdown */}
+        {/* 5. Skill Sets Categorized Breakdown */}
         <BenjaminSkills />
 
-        {/* 7. Final Callout, Connect Marquee Ribbon & Technical Colophon */}
+        {/* 6. Final Callout, Connect Marquee Ribbon & Technical Colophon */}
         <BenjaminFooter />
-      </motion.main>
+      </main>
     </div>
   );
 }
